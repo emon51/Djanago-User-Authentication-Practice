@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> index page</title>
+</head>
+<body>
+    <h1> Index Page </h1>
+
+    <h1> Welcome, {{user.username }} </h1>
+
+    <div style="display: flex;">
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}"> 
+                {% csrf_token %} 
+                <button type="submit"> Logout </button>
+            </form>
+
+            <button> <a href="{% url 'password_change' %}"> changed password </a> </button>
+
+        {% else %} 
+            <button> <a href="{% url 'signup' %}"> SignUp </a> </button>
+            <button> <a href="{% url 'login' %}"> LogIn </a> </button>
+        {% endif %}
+
+    </div>
+
+    <div> 
+        {% block content %}
+         <h2> index page's information, override me </h2>
+        {% endblock %}
+    </div>
+    
+    
+</body>
+</html>
